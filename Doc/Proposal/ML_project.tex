@@ -1,0 +1,26 @@
+\documentclass[4paper, 12pt]{article}
+\usepackage{hyperref}
+
+\title{Online learning in football analysis}
+\author{Matteo Turchetta\\Riccardo Moriconi\\Yijun Pan}
+
+\begin{document}
+\maketitle
+
+\section{Overview}
+The proposal is to apply active learning theory to sport bet. In particular the project would focus on the "Prediction with expert advice" framework. The main idea is to exploit bookmakers as experts and to intrepret the odds as their 'expert' advice.
+\section{Data source}
+The main data source for our project would be  http://www.football-data.co.uk/ which provides the odds for several european championships given by ten different bookmakers. An initial approach to the problem would exploit just this data. In the case the result is not satisfactory with such a small number of experts we could try to gather more data from other websites as http://www.oddsportal.com/
+\section{Goals}
+\subsection{Short term results}
+The first possible objective we thought about is to build a multiclass classifier able to predict the results of future games based on a limited amount of hystorical data and on the odds for the current matches. In the first part of the project we could use as loss function the number of mistakes in predicting the match results.
+\subsection{Further objectives}
+Once the basic setting of the problem is completed we could try to enrich it by introducing more sophisticated loss functions. For example we could use the expected reward in terms of money as a performance index of our lerning algorithm. In this case the output wouldn't be a prediction of the results of all the games but it would consist in an optimal bet. Further topics that could be explored are:
+\begin{itemize}
+\item Possible submodular loss functions for an efficient optimization of the algorithm
+\item Estimation of the uncertainty of the prediction
+\end{itemize}
+
+
+
+\end{document}
