@@ -1,4 +1,4 @@
-function [ predictions, invest, profit, property, betCase ] = simpleSim( initial_invest, observations, expert_predictions, odds, pred_algorithm, pred_params)
+function [ predictions, invest, profit, property, betCase ] = baselineFollowOne( initial_invest, observations, input_predictions, odds)
 %SIMULI simulation of the greedy investment 
 %INPUT: 
 %   initial_invest            - total investment at the beginning
@@ -38,14 +38,14 @@ property(1:start) = initial_invest;
 
 % Apply prediction algorithm to get probability predictions from experts'
 % advices
-[ ~, ~, predictions, ~ ] = pred_algorithm( observations, expert_predictions, pred_params);
+predictions = input_predictions;
 
 % Transform probability to discrete decision
 [max_conf, decisions] = max(predictions, [], 2);
 
 % Decide how much money we would invest on a single game
 % TODO: not a good idea, the expection at the round could be negative, which
-% lead us to a bad call, never the less focusing on the expectation is  
+% lead us to a bad call, nevertheless focusing on the expectation is  
 % Bet on games
 
 betCase = zeros(7,0);

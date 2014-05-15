@@ -1,13 +1,11 @@
-function [ predictions, invest, profit, property, betCase ] = simpleSim( initial_invest, observations, expert_predictions, odds, pred_algorithm, pred_params)
+function [ decisions, invest, profit, property, betCase] = baselineHomeWin( initial_invest, observations, odds)
 %SIMULI simulation of the greedy investment 
 %INPUT: 
 %   initial_invest            - total investment at the beginning
 %   observations        - results of every game 
 %   expert_predictions  - predictions of the experts
 %   odds                - odds provided by bookmakers
-%   pred_algorithm      - prediction algorithm
-%   pred_param          - parameters for the prediction algorithm
-%
+
 %OUTPUT:
 %   predictions         - game result we predict for each round
 %   invest              - investment for each round
@@ -28,20 +26,15 @@ for i = 1:ob_dim
     odds3(:, :, i) = odds(:, i:ob_dim:size(odds,2));
 end
 
-% Fold in case we don't have a high probability estimation
-conf_thresh = 0.8;
+% Investment percentage for each round
+invest_ratio = 0.02;
+
+% Always bet on home win (1)
+decisions = ones(size(observations));
 
 % Game that we start betting.
 start = 100;
 property(1:start) = initial_invest;
-
-
-% Apply prediction algorithm to get probability predictions from experts'
-% advices
-[ ~, ~, predictions, ~ ] = pred_algorithm( observations, expert_predictions, pred_params);
-
-% Transform probability to discrete decision
-[max_conf, decisions] = max(predictions, [], 2);
 
 % Decide how much money we would invest on a single game
 % TODO: not a good idea, the expection at the round could be negative, which
@@ -51,7 +44,7 @@ property(1:start) = initial_invest;
 betCase = zeros(7,0);
 
 for i=start:size(decisions)
-    invest(i) = max(0, ((max_conf(i) - conf_thresh) ./ (1 - conf_thresh)) .* (property(i-1)*1/3));
+    invest(i) = invest_ratio * property(i-1);
     
     if invest(i) > 0
         
