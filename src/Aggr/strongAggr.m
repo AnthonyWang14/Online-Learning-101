@@ -1,4 +1,4 @@
-function [ loss, expert_loss, predictions, weights ] = strongAggr( observations, expert_predictions, varargin)
+function [ predictions,loss , expert_loss, weights ] = strongAggr( observations, expert_predictions, varargin)
 % Strong aggregating algorithm for the Brier game
 % INPUT:
 %   observations        - results of every game 
@@ -10,13 +10,14 @@ function [ loss, expert_loss, predictions, weights ] = strongAggr( observations,
 %   predictions         - predictions of the algorithm
 %
 
+ob_dim = 3;
 
 %TODO: better argument parsing.
 if nargin == 3
-    % Dimension of observation space
-    ob_dim = varargin{1};
+    eta = varargin{1};
 else
-    ob_dim = 3;
+    % learning rate is fixed to 1, as suggested.
+    eta = 1;
 end
 
 nGame = length(observations);
@@ -38,10 +39,10 @@ for i = 1:nGame
    
         % TODO: eliminate this loop
         for k = 1:nExpert
-            gn(j) = gn(j) + weights(k)*exp(-prob_measure(j, round_prediction(k, :)));
+            gn(j) = gn(j) + weights(k)*exp(-eta * l2sq(j, round_prediction(k, :)));
         end
         
-        gn(j) = -log(gn(j));
+        gn(j) = -log(gn(j)) / eta;
    
     end
     
@@ -66,32 +67,22 @@ for i = 1:nGame
         predictions(i, j) = max(s-gn(j), 0) / 2;
     end
     
-    loss(i) = prob_measure(observations(i), predictions(i, :));
+    loss(i) = l2sq(observations(i), predictions(i, :));
     
     for k=1:nExpert
-        expert_loss(i, k) = prob_measure(observations(i), round_prediction(k, :));
+        expert_loss(i, k) = l2sq(observations(i), round_prediction(k, :));
     end
     
     % Update weights
-    weights = weights.*exp(-expert_loss(i, :));
+    weights = weights.*exp(- eta * expert_loss(i, :));
     
-    % Normalize weights in case weights -> 0
-    if min(weights) < 1e-10
-        weights = weights*1e8;
-    end
+    % Normalize weights for numerical stability
+    weights = weights ./ sum(weights);
     
 end
 
 
-
 end
 
-function lambda = prob_measure(omega, gamma)
-% Probability measure function
 
-    delta = zeros(size(gamma));
-    delta(omega) = 1;
-    lambda = sum((gamma - delta).^2);
-
-end
 
