@@ -171,25 +171,85 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Overview}{name=overview,column=0,row=0}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\bf Goal}
+
+Apply online learning algorithms to derive profitable sport bets without prior knowledge of the games.
+
+\vspace{0.07cm}
+{\bf Online Learning with Expert Advice}
+\vspace{-0.2cm}
 \begin{itemize}[leftmargin=*]\compresslist
     %\setlength{\itemindent}{-1em}
-	\item[-] The {\bf goal} of this project is to apply online learning algorithms to derive profitable sport bets without prior knowledge of the games.
-	\item[-] The problem can be solved in the setting of online learning with expert. In this framework the learner must forecast the outcome of a certain event. He is given a pool of experts which provide advices in the form of forecasts over the outcome of the event. Each expert is assigned a weight according to how reliable he is. The concept of reliability is defined through a performance measure or loss function.
-	\item[-] In our case bookmakers are the experts and their advices consist of probability distributions over the outcome of a match (which are extracted from the odds). 
-The loss function plays a crucial role.
-
+	\item[-] The learner is given a pool of experts ({\bf bookmakers}) which provide advices in the form of forecasts ({\bf odds}) over the outcome of an event ({\bf sport game}). 
+	\item[-] Experts are assigned weights based on their credits. 
+	\item[-] The concept of credibility is defined on the loss function.
 \end{itemize}
-
-
+  
+  
   }
-  
-  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Method}{name=method,column=0,below=overview,above=bottom}{
+  \headerbox{Learning Algorithm}{name=algorithm, column=0,below=overview}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  }
-  
+ \vspace{-0.4cm}
+\begin{algorithm}[H]
+\caption{Exponential Weight Algorithms}
+\begin{algorithmic}[1]
+ \STATE ${w_0^k} = 1/K, k = 1,...,K$
+\FORALL {$t = 1:N$}
+    \STATE Experts announce predictions $\gamma _t^k \in \Gamma ,k = 1,...,K$
+    \STATE Algorithm announces ${\gamma _t} = S(\gamma _t^1,...,\gamma _t^K) \in \Gamma$
+    \STATE Reality announces ${\omega _t} \in \Omega$
+    \STATE $w_t^k = w_{t - 1}^k{e^{ - \eta \lambda ({\omega _N},\lambda _t^k)}}$
+\ENDFOR
+\STATE Return ${\bm{x}}^{(M)}, {\bm{y}}^{(M)}$
+\end{algorithmic}
+\label{alg:inf}
+\end{algorithm}
+\vspace{-0.7cm}
+\begin{itemize}[leftmargin = *]\compresslist
+    \item[-] For Weighted Average Algorithm, $S$ is weighted mean.
+    \item[-] For Follow the Leader Algorithm, $S$ is maximization.
+    \item[-] For Strong Aggregating Algorithm, a substitution function $S'(g_t)$ is applied on the generalised prediction ${g_t}(\omega )$.
+\end{itemize}
+\vspace{-0.3cm}
  
+
+  }
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Loss Function}{name=loss, column=0, below=algorithm, above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The proposed loss functions are minimised when the predicted distribution coincides with the true probability distribution ( {\bf Proper Scoring Rule}).
+
+\vspace{0.1cm}
+{\bf Brier Loss}
+
+In this case the target distribution ${\delta _\omega}$ is a Dirac distribution concentrated at the actual outcome y of the match.
+\[\ell \left( {\gamma ,\underline \omega  } \right) = \sum\limits_{\omega  \in \Omega } {{{\left( {\gamma \left( \omega  \right) - {\delta _{\underline \omega  }}\left( \omega  \right)} \right)}^2}} \]
+{\bf Calibration Loss}
+
+A forecaster is $\epsilon$-calibrated if:
+\[P\left( {\omega  = \omega_*|\gamma \left( \omega_* \right) \in \left[ {p - \varepsilon ;p + \varepsilon } \right]} \right) \approx p,\varepsilon  > 0\]
+
+In practise, reality does not reveal the true probability distribution. But we can approximate through relative frequency $ $ and use it as target distribution. 
+
+  }
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Loss Function}{name=losscont, column=1}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Thus the calibration loss function can be defined as
+\[P\left( {\omega  = \omega_*|\gamma \left( i \right) \in \left[ {p - \varepsilon ;p + \varepsilon } \right]} \right) \approx p,\varepsilon  > 0\]
+Multiple loss functions can be derived by replacing the $l2$ norm.
+\vspace{-0.2cm}
+\begin{itemize}[leftmargin = *]\compresslist
+    \item[-] KL divergence (logarithmic loss)
+    \item[-] $l1$ norm
+\end{itemize}
+\vspace{-0.3cm}
+
+  }
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{Results}{name=results,column=2,span=1,row=0}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
