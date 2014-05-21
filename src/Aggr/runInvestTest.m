@@ -1,10 +1,10 @@
 close all
 clear all
 
-load('data_all.mat');
+load('data_pl.mat');
 load('calib_2_3.mat');
 
-thresh = [0];
+thresh = [0.01];
 invest_way = 'exp_fix';
 
 for t = 1:length(thresh)
@@ -14,13 +14,13 @@ for t = 1:length(thresh)
 
     cc = hsv(6);
 
-    [ predictions, invest, profit, property, bet_case_strong ] = simpleSim( 100, observations, expert_predictions, odds, @strongAggr, 0.5, invest_way, thresh(t));
+    [ predictions, invest, profit, property, bet_case_strong ] = simpleSim( 100, observations, expert_predictions, odds, @strongAggr, 1, invest_way, thresh(t));
     plot(property, '-', 'color', cc(1, :));
 
-    [ predictions, invest, profit, property, bet_case_avg ] = simpleSim( 100, observations, expert_predictions, odds, @weightedAvg, {0.5, @l2sq}, invest_way, thresh(t));
+    [ predictions, invest, profit, property, bet_case_avg ] = simpleSim( 100, observations, expert_predictions, odds, @weightedAvg, {1, @l2sq}, invest_way, thresh(t));
     plot(property, '-', 'color', cc(2, :));
 
-    [ predictions, invest, profit, property, bet_case_leader ] = simpleSim( 100, observations, expert_predictions, odds, @followLeader, {0.5, @l2sq}, invest_way, thresh(t));
+    [ predictions, invest, profit, property, bet_case_leader ] = simpleSim( 100, observations, expert_predictions, odds, @followLeader, {1, @l2sq}, invest_way, thresh(t));
     plot(property, '-', 'color', cc(3, :));
 
     % [ predictions, invest, profit, property, bet_case_hw ] = simpleSim( 100, observations, expert_predictions, odds, @homeWin, 1, 'prob_fix', thresh(t));
@@ -46,7 +46,7 @@ for t = 1:length(thresh)
     plot(property, '-.', 'color', cc(6, :));
 
 
-    legend('strongAggr', 'weightedAvg', 'followBest', 'followOne', 'calibration');
+    legend('strongAggr', 'weightedAvg', 'followBest', 'bookmaker', 'calibration');
     title(['thresh = ', num2str(thresh(t))]);
 
 
