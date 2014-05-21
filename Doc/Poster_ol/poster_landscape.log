@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.9)  19 MAY 2014 21:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.9)  22 MAY 2014 01:08
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **poster_landscape.tex
 (./poster_landscape.tex
@@ -700,7 +701,11 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 LaTeX Warning: Unused global option(s):
     [final].
 
-(./poster_landscape.aux)
+(./poster_landscape.aux
+
+LaTeX Warning: Label `alg:inf' multiply defined.
+
+)
 \openout1 = `poster_landscape.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
@@ -716,8 +721,7 @@ LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
 LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Try loading font information for T1+ppl on input line 75.
-
-(/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ppl.fd
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -842,20 +846,120 @@ LaTeX Font Info:    Try loading font information for T1+phv on input line 149.
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 \leftimgwidth=\skip83
-LaTeX Font Info:    Try loading font information for OMS+ppl on input line 184.
+LaTeX Font Info:    Try loading font information for OMS+ppl on input line 189.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/omsppl.fd
 File: omsppl.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 184.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 189.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Package epstopdf Info: Source file: <fig/exp/1norm.eps>
+(epstopdf)                    date: 2014-05-21 23:46:13
+(epstopdf)                    size: 443223 bytes
+(epstopdf)             Output file: <fig/exp/1norm-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-05-21 23:51:04
+(epstopdf)                    size: 299639 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/exp/1norm-eps-converte
+d-to.pdf fig/exp/1norm.eps>
+(epstopdf)             \includegraphics on input line 311.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/exp/1norm-eps-converted-to.pdf, id=21, 1030.85126pt x 178.6675pt>
+File: fig/exp/1norm-eps-converted-to.pdf Graphic file (type pdf)
+
+<use fig/exp/1norm-eps-converted-to.pdf>
+Package pdftex.def Info: fig/exp/1norm-eps-converted-to.pdf used on input line 
+311.
+(pdftex.def)             Requested size: 304.31036pt x 52.74188pt.
+Package epstopdf Info: Source file: <fig/exp/2norm.eps>
+(epstopdf)                    date: 2014-05-21 23:28:13
+(epstopdf)                    size: 439711 bytes
+(epstopdf)             Output file: <fig/exp/2norm-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-05-21 23:29:44
+(epstopdf)                    size: 241894 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/exp/2norm-eps-converte
+d-to.pdf fig/exp/2norm.eps>
+(epstopdf)             \includegraphics on input line 311.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/exp/2norm-eps-converted-to.pdf, id=22, 1030.85126pt x 178.6675pt>
+File: fig/exp/2norm-eps-converted-to.pdf Graphic file (type pdf)
+
+<use fig/exp/2norm-eps-converted-to.pdf>
+Package pdftex.def Info: fig/exp/2norm-eps-converted-to.pdf used on input line 
+311.
+(pdftex.def)             Requested size: 304.31036pt x 52.74188pt.
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Package epstopdf Info: Source file: <fig/exp/ep_compare.eps>
+(epstopdf)                    date: 2014-05-21 22:10:50
+(epstopdf)                    size: 87421 bytes
+(epstopdf)             Output file: <fig/exp/ep_compare-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-05-21 22:11:47
+(epstopdf)                    size: 15397 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/exp/ep_compare-eps-con
+verted-to.pdf fig/exp/ep_compare.eps>
+(epstopdf)             \includegraphics on input line 358.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/exp/ep_compare-eps-converted-to.pdf, id=23, 1400.23125pt x 288.07625pt>
+File: fig/exp/ep_compare-eps-converted-to.pdf Graphic file (type pdf)
+
+<use fig/exp/ep_compare-eps-converted-to.pdf>
+Package pdftex.def Info: fig/exp/ep_compare-eps-converted-to.pdf used on input 
+line 358.
+(pdftex.def)             Requested size: 304.31036pt x 62.60332pt.
+Package epstopdf Info: Source file: <fig/exp/exponly.eps>
+(epstopdf)                    date: 2014-05-21 22:49:00
+(epstopdf)                    size: 50734 bytes
+(epstopdf)             Output file: <fig/exp/exponly-eps-converted-to.pdf>
+(epstopdf)                    date: 2014-05-21 22:49:16
+(epstopdf)                    size: 22373 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/exp/exponly-eps-conver
+ted-to.pdf fig/exp/exponly.eps>
+(epstopdf)             \includegraphics on input line 358.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/exp/exponly-eps-converted-to.pdf, id=24, 1031.855pt x 178.6675pt>
+File: fig/exp/exponly-eps-converted-to.pdf Graphic file (type pdf)
+
+<use fig/exp/exponly-eps-converted-to.pdf>
+Package pdftex.def Info: fig/exp/exponly-eps-converted-to.pdf used on input lin
+e 358.
+(pdftex.def)             Requested size: 304.31036pt x 52.6901pt.
+Package epstopdf Info: Source file: <fig/exp/expectation_both.eps>
+(epstopdf)                    date: 2014-05-22 00:52:33
+(epstopdf)                    size: 514438 bytes
+(epstopdf)             Output file: <fig/exp/expectation_both-eps-converted-to.
+pdf>
+(epstopdf)                    date: 2014-05-22 00:52:39
+(epstopdf)                    size: 164595 bytes
+(epstopdf)             Command: <repstopdf --outfile=fig/exp/expectation_both-e
+ps-converted-to.pdf fig/exp/expectation_both.eps>
+(epstopdf)             \includegraphics on input line 358.
+Package epstopdf Info: Output file is already uptodate.
+
+<fig/exp/expectation_both-eps-converted-to.pdf, id=25, 1886.04625pt x 964.60374
+pt>
+File: fig/exp/expectation_both-eps-converted-to.pdf Graphic file (type pdf)
+ <use fig/exp/expectation_both-eps-converted-to.pdf>
+Package pdftex.def Info: fig/exp/expectation_both-eps-converted-to.pdf used on 
+input line 358.
+(pdftex.def)             Requested size: 304.31036pt x 155.635pt.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
@@ -865,24 +969,40 @@ Missing character: There is no ; in font nullfont!
  [2
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./fig/e
-thzlogo.pdf>] (./poster_landscape.aux) ) 
+thzlogo.pdf> <./fig/exp/1norm-eps-converted-to.pdf> <./fig/exp/2norm-eps-conver
+ted-to.pdf> <./fig/exp/ep_compare-eps-converted-to.pdf> <./fig/exp/exponly-eps-
+converted-to.pdf> <./fig/exp/expectation_both-eps-converted-to.pdf>] (./poster_
+landscape.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 14287 strings out of 493315
- 273934 string characters out of 6137904
- 330199 words of memory out of 5000000
- 17379 multiletter control sequences out of 15000+600000
- 22132 words of font info for 44 fonts, out of 8000000 for 9000
+ 14569 strings out of 493315
+ 280004 string characters out of 6137904
+ 367193 words of memory out of 5000000
+ 17651 multiletter control sequences out of 15000+600000
+ 25291 words of font info for 48 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 63i,9n,70p,441b,953s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fon
-ts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/urw/he
-lvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/palatino/
-uplb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/palatino/uplr8a.
-pfb>
-Output written on poster_landscape.pdf (1 page, 48745 bytes).
+ 63i,14n,70p,427b,1042s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local
+/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/
+texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texl
+ive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2
+013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+13/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2013/texmf-
+dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
+e1/urw/palatino/uplri8a.pfb>
+Output written on poster_landscape.pdf (1 page, 888144 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 80 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 139 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -193,38 +193,65 @@ Apply online learning algorithms to derive profitable sport bets without prior k
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  \vspace{-0.4cm}
 \begin{algorithm}[H]
-\caption{Exponential Weight Algorithms}
+\caption{Weighted Average Algorithm}
 \begin{algorithmic}[1]
  \STATE ${w_0^k} = 1/K, k = 1,...,K$
 \FORALL {$t = 1:N$}
     \STATE Experts announce predictions $\gamma _t^k \in \Gamma ,k = 1,...,K$
-    \STATE Algorithm announces ${\gamma _t} = S(\gamma _t^1,...,\gamma _t^K) \in \Gamma$
+    \STATE Algorithm announces ${\gamma _t} = \frac{{\sum {w_t^k\gamma _t^k} }}{{\sum {w_t^k} }}$
     \STATE Reality announces ${\omega _t} \in \Omega$
     \STATE $w_t^k = w_{t - 1}^k{e^{ - \eta \lambda ({\omega _N},\lambda _t^k)}}$
 \ENDFOR
-\STATE Return ${\bm{x}}^{(M)}, {\bm{y}}^{(M)}$
 \end{algorithmic}
 \label{alg:inf}
 \end{algorithm}
 \vspace{-0.7cm}
 \begin{itemize}[leftmargin = *]\compresslist
-    \item[-] For Weighted Average Algorithm, $S$ is weighted mean.
-    \item[-] For Follow the Leader Algorithm, $S$ is maximization.
-    \item[-] For Strong Aggregating Algorithm, a substitution function $S'(g_t)$ is applied on the generalised prediction ${g_t}(\omega )$.
+    \item[-] Similarly, for Follow the Leader Algorithm, predication function is maximisation instead of weighted mean.
 \end{itemize}
 \vspace{-0.3cm}
- 
+\begin{algorithm}[H]
+\caption{Strong Aggregating Algorithm}
+\begin{algorithmic}[1]
+ \STATE ${w_0^k} = 1/K, k = 1,...,K$
+\FORALL {$t = 1:N$}
+    \STATE Experts announce predictions $\gamma _t^k \in \Gamma ,k = 1,...,K$
+    \STATE Generalised predication ${g_t}(\omega ) =  - \frac{1}{\eta }\ln \sum\limits_{k = 1}^K {{w_k}} {e^{ - \eta \lambda (\omega ,\gamma _t^k)}},\forall \omega  \in \Omega$
+    \STATE Algorithm announces ${\gamma _t} = S({g_t}) \in \Gamma$
+    \STATE Reality announces ${\omega _t} \in \Omega$
+    \STATE $w_t^k = w_{t - 1}^k{e^{ - \eta \lambda ({\omega _N},\lambda _t^k)}}$
+\ENDFOR
+\end{algorithmic}
+\label{alg:inf}
+\end{algorithm}
+\vspace{-0.7cm}
+\begin{itemize}[leftmargin = *]\compresslist
+    \item[-] For Brier Loss ($l2$ squared norm), the substitution function $S$ is ${\gamma _k}\{ \omega \}  = {\rm{ }}{(s - {g_k}(\omega ))^ + }/2$, where ${\sum\nolimits_{\omega  \in \Omega } {(s - {g_k}(\omega ))} ^ + } = 2$.
+\end{itemize}
+\vspace{-0.3cm}
 
   }
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Loss Function}{name=loss, column=0, below=algorithm, above=bottom}{
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Probability Extraction}{name=prob, column=0, below=algorithm, above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We use [Vovk09] to extract probability estimation from odds. Given the odds ($o_h, o_d, o_a$), solve $\gamma$ such that:
+\[\frac{1}{{{o_h^\gamma }}} + \frac{1}{{{o_d^\gamma }}} + \frac{1}{{{o_a^\gamma }}} = 1\]
+Then we have $P_h = o_h^{-\gamma}$, $P_d = o_d^{-\gamma}$, $P_a = o_a^{-\gamma}$.
+
+  }
+  
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Loss Function}{name=loss, column=1}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 The proposed loss functions are minimised when the predicted distribution coincides with the true probability distribution ( {\bf Proper Scoring Rule}).
 
-\vspace{0.1cm}
+\vspace{0.2cm}
 {\bf Brier Loss}
 
 In this case the target distribution ${\delta _\omega}$ is a Dirac distribution concentrated at the actual outcome y of the match.
+
 \[\ell \left( {\gamma ,\underline \omega  } \right) = \sum\limits_{\omega  \in \Omega } {{{\left( {\gamma \left( \omega  \right) - {\delta _{\underline \omega  }}\left( \omega  \right)} \right)}^2}} \]
 {\bf Calibration Loss}
 
@@ -232,14 +259,8 @@ A forecaster is $\epsilon$-calibrated if:
 \[P\left( {\omega  = \omega_*|\gamma \left( \omega_* \right) \in \left[ {p - \varepsilon ;p + \varepsilon } \right]} \right) \approx p,\varepsilon  > 0\]
 
 In practise, reality does not reveal the true probability distribution. But we can approximate through relative frequency $ $ and use it as target distribution. 
-
-  }
-  
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Loss Function}{name=losscont, column=1}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Thus the calibration loss function can be defined as
-\[P\left( {\omega  = \omega_*|\gamma \left( i \right) \in \left[ {p - \varepsilon ;p + \varepsilon } \right]} \right) \approx p,\varepsilon  > 0\]
+\[\ell \left( \gamma  \right) = \sum\limits_{\omega  \in \Omega } {{{\left( {{{\hat P}_\omega } - \gamma \left( \omega  \right)} \right)}^2}} \]
 Multiple loss functions can be derived by replacing the $l2$ norm.
 \vspace{-0.2cm}
 \begin{itemize}[leftmargin = *]\compresslist
@@ -251,13 +272,100 @@ Multiple loss functions can be derived by replacing the $l2$ norm.
   }
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Results}{name=results,column=2,span=1,row=0}{
+  \headerbox{Results}{name=results,column=1, below=loss, above=bottom}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  }
+{\bf Dataset}
+\vspace{-0.2cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-] A total of 11624 games from 6 different leagues over 7 years.
+    \item[-] 10 bookmakers with odds ($1X2$) for every game.
+    \item[-] Use 2170 games from 1 league (England Premier League) as training data. The rest 9454 games are testing data.
+\end{itemize}
+
+{\bf Regret}
+
+ The following plots show the regret (in the form of difference between cumulative loss of the algorithm and that of every bookmaker) of the Weighted Average Algorithm with Brier loss and $\epsilon$-Calibration loss.
+ 
+ \vspace{-0.2cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-]  {\bf $l1$ norm}
+\end{itemize}
+\vspace{-0.5cm}
+ 
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{fig/exp/1norm.eps}
+\end{figure}
+ 
+ \vspace{-0.8cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-]  {\bf $l2$ norm}
+\end{itemize}
+\vspace{-0.5cm}
+
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{fig/exp/2norm.eps}
+\end{figure}
+
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{Conclusion}{name=conclusion,column=2,below=results, span=1,row=0}{
+  \headerbox{Results}{name=resultscon,column=2}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+{\bf Betting Strategy}
+
+\vspace{-0.2cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-] Two criteria (probability threshold \& maximum probability expectation threshold) for the betting strategies are effective.
+\end{itemize}
+\vspace{-0.5cm}
+
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{fig/exp/ep_compare.eps}
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-] Depending solely on the margin expectation leads to poor performance.  
+    \end{itemize}
+\vspace{-0.5cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{fig/exp/exponly.eps}
+\end{figure}
+
+{\bf Betting Simulation}
+\vspace{-0.2cm}
+\begin{itemize}[leftmargin=*]\compresslist
+    \item[-] Simulation on the testing data.
+    \item[-] 100 rounds as burn-in time.
+    \item[-] Baseline \textit{Follow the Leader}: follow the bookmaker with highest weights.    
+        \item[-] Baseline \textit{Best Bookmaker}: best performance of 10 bookmakers based on overall profit.
+\end{itemize}
+\vspace{-0.7cm}
+ 
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width = \linewidth]{fig/exp/expectation_both.eps}
+\end{figure}
+ 
+ 
+  }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{Conclusion}{name=conclusion,column=2,below=resultscon, above = bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{itemize}[leftmargin=*]\compresslist
+    \item[-] Bookmakers provide biased probability estimation.
+    \item[-] A profitable margin exists for carefully designed betting strategies even without the integration of event features. Although it is very small compared with bookmakers' own profit estimation.
+    \item[-] Measurement based solely on calibration without resolution for probability forecasting can be misleading.    
+\end{itemize}
   }
 
 
